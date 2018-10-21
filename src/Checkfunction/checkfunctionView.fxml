@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Checkfunction.CheckfunctionViewController">
+   <children>
+      <Pane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TextField fx:id="answer" layoutX="150.0" layoutY="200.0" prefHeight="50.0" prefWidth="200.0" />
+            <TextField id="word" fx:id="word" editable="false" layoutX="150.0" layoutY="125.0" prefHeight="50.0" prefWidth="200.0" />
+            <TextField fx:id="correction" editable="false" layoutX="150.0" layoutY="275.0" prefHeight="50.0" prefWidth="200.0" />
+            <Label layoutX="50.0" layoutY="140.0" prefHeight="20.0" text="Word" />
+            <Label layoutX="50.0" layoutY="215.0" prefHeight="20.0" text="Answer" />
+            <Label layoutX="50.0" layoutY="290.0" prefHeight="20.0" text="Correction" />
+            <ButtonBar layoutX="400.0" layoutY="500.0" prefHeight="50.0" prefWidth="240.0">
+              <buttons>
+                <Button mnemonicParsing="false" text="Start" />
+                  <Button mnemonicParsing="false" text="Skip" />
+                  <Button mnemonicParsing="false" text="Hint" />
+                  <Button mnemonicParsing="false" text="Stop" />
+              </buttons>
+            </ButtonBar>
+            <Button fx:id="checkButton" layoutX="433.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleCheckButton" prefHeight="50.0" prefWidth="100.0" text="Check" />
+            <Button layoutX="589.0" layoutY="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Next" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
