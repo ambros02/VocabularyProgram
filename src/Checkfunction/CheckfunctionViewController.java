@@ -23,43 +23,65 @@ public class CheckfunctionViewController {
 	@FXML
 	private TextField correction;
 	
+	private boolean running = false;
+	
 	HashMap<String,String> myDictionary = new HashMap<String,String>();
 	private List<String> englishWords;
 	private String englishWord;
 	private String germanWord;
 	private boolean correct = false;
-	private Random rnd;
+	private Random rnd = new Random();
 
 	@FXML
     public void initialize() {
-        BufferedReader br;
-
-		try {
-			File file = new File(".\\example.txt");
-			br = new BufferedReader(new FileReader(file));
-			String line;
-			int language = 0;
-	        while((line = br.readLine()) != null){
-	            String[] splited = line.split("=");
-				myDictionary.put(splited[0 + language], splited[1 - language]);
-	        }
-	        englishWords = new ArrayList<>(myDictionary.keySet());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		rnd = new Random();
-        englishWord = englishWords.get(rnd.nextInt(englishWords.size() - 1));
-        germanWord = myDictionary.get(englishWord);
-        word.setText(englishWord);
     }
+	
+	@FXML
+	public void handleStartButton(ActionEvent actionEvent) {
+		if (!running) {
+			BufferedReader br;
+	
+			try {
+				File file = new File(".\\example.txt");
+				br = new BufferedReader(new FileReader(file));
+				String line;
+				int language = 0;
+		        while((line = br.readLine()) != null){
+		            String[] splited = line.split("=");
+					myDictionary.put(splited[0 + language], splited[1 - language]);
+		        }
+		        
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			englishWords = new ArrayList<>(myDictionary.keySet());
+			
+	        englishWord = englishWords.get(rnd.nextInt(englishWords.size() - 1));
+	        germanWord = myDictionary.get(englishWord);
+	        word.setText(englishWord);
+		}
+	}
+	
+	@FXML
+	public void handleStopButton(ActionEvent actionEvent) {
+		if (running) {
+			running=false;
+			englishWord = null;
+			englishWords = new ArrayList<>();
+			word.setText("");
+			answer.setText("");
+	        correction.setText("");
+		}
+		
+	}
 	
 	@FXML
 	public void handleCheckButton(ActionEvent actionEvent) {
 		if (englishWord != null) {
 			if (answer.getText().trim().equals(germanWord)) {
 				correction.setText("CORRECT");
-				correct  = true;
+				correct = true;
 			} else {
 				correction.setText("FALSE");
 			}
@@ -85,6 +107,7 @@ public class CheckfunctionViewController {
 	        germanWord = myDictionary.get(englishWord);
 		} else {
 			englishWord = null;
+			running = false;
 		}
 		word.setText(englishWord == null ? "" : englishWord);
         answer.setText("");
