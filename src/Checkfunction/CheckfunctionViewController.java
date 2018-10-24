@@ -42,11 +42,15 @@ public class CheckfunctionViewController {
 			BufferedReader br;
 	
 			try {
+				//TODO change to resource folder
 				br = new BufferedReader(new FileReader(new File(".\\example.txt")));
 				String line;
+				//TODO implement language check
+				// switches key and value if language is 1 (only 1 and 0 as values allowed)
+				int language = 0;
 		        while((line = br.readLine()) != null){
 		            String[] splited = line.split("=");
-					myDictionary.put(splited[0], splited[1]);
+					myDictionary.put(splited[0 + language], splited[1 - language]);
 		        }
 		        
 			} catch (IOException e) {
@@ -56,7 +60,7 @@ public class CheckfunctionViewController {
 			
 			englishWords = new ArrayList<>(myDictionary.keySet());
 
-			englishWord = englishWords.get(rnd.nextInt(englishWords.size() - 1));
+			englishWord = englishWords.get(rnd.nextInt(englishWords.size()));
 	        germanWord = myDictionary.get(englishWord);
 	        word.setText(englishWord);
 		}
@@ -76,7 +80,7 @@ public class CheckfunctionViewController {
 	@FXML
 	public void handleCheckButton(ActionEvent actionEvent) {
 		if (running) {
-			if (answer.getText().toLowerCase().trim().equals(germanWord.toLowerCase())) {
+			if (answer.getText().trim().equals(germanWord.trim())) {
 				correction.setText("CORRECT");
 				correct = true;
 			} else {
@@ -92,12 +96,14 @@ public class CheckfunctionViewController {
 			if (correct) {
 				correct = false;
 				englishWords.remove(englishWord);        
+			} else {
+				englishWords.add(englishWord);
 			}
 			answer.setEditable(true);
 		}
 		
 		if (!englishWords.isEmpty()) {
-			int index = rnd.nextInt(englishWords.size() - 1);
+			int index = rnd.nextInt(englishWords.size());
 			englishWord = englishWords.get(index);
 	        germanWord = myDictionary.get(englishWord);
 		} else {
