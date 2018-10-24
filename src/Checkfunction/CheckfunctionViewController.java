@@ -63,6 +63,7 @@ public class CheckfunctionViewController {
 			englishWord = englishWords.get(rnd.nextInt(englishWords.size()));
 	        germanWord = myDictionary.get(englishWord);
 	        word.setText(englishWord);
+	        answer.setEditable(true);
 		}
 	}
 	
@@ -72,6 +73,7 @@ public class CheckfunctionViewController {
 			running = false;
 			word.setText("");
 			answer.setText("");
+			answer.setEditable(false);
 	        correction.setText("");
 		}
 		
@@ -110,8 +112,11 @@ public class CheckfunctionViewController {
 			running = false;
 		}
 		
-		word.setText(running ? "" : englishWord);
+		word.setText(!running ? "" : englishWord);
         answer.setText("");
+        if (!running) {
+        	answer.setEditable(false);
+        }
         correction.setText("");
 	}
 	
