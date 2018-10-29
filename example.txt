@@ -1,3 +1,5 @@
 say=sagen
 die=sterben
 live=leben
+gay=schwul
+tree=Baum

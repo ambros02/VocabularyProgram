@@ -1,0 +1,10 @@
+@FXML
+	public void handleLanguageButton(ActionEvent actionEvent) {
+		if(answer != null) {
+			
+		}
+		else {
+			language.setText("English");
+		}
+	}
+	

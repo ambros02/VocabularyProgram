@@ -1,0 +1,6 @@
+	@FXML
+	public void handleLanguageButton() {
+		if(running = true) {
+			button.setText("English");
+		}
+	}
